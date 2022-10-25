@@ -11,6 +11,7 @@ import org.apache.lucene.analysis.miscellaneous.PerFieldAnalyzerWrapper;
 import org.apache.lucene.analysis.pattern.PatternTokenizerFactory;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.codecs.Codec;
+import org.apache.lucene.codecs.simpletext.SimpleTextCodec;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -40,6 +41,7 @@ public class IndexCreator {
 		perFieldAnalyzers.put("titolo", new StandardAnalyzer());
 		Analyzer analyzer = new PerFieldAnalyzerWrapper(defaultAnalyzer, perFieldAnalyzers);
 		IndexWriterConfig config = new IndexWriterConfig(analyzer);
+		config.setCodec(new SimpleTextCodec());
 		
 		
 		this.writer = new IndexWriter(directory, config);
