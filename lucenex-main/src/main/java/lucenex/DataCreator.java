@@ -9,22 +9,48 @@ import org.apache.lucene.store.FSDirectory;
 
 
 public class DataCreator {
+	final static private String sampleData="/resources/sampleDataset.json";
+	final static private String indexPath="indexedFiles";
+	 private Parser parser;
+	 private IndexCreator indexer;
+	public DataCreator() 
+	{
+		this.parser=new Parser(DataCreator.class.getResourceAsStream(sampleData));
+		this.indexer=null;
+		
+		
+	}
 	
-	static Parser parser;
-	static IndexCreator indexer;
+	
 
-	public static void main(String[] args) throws Exception {
-
-		Path path = Paths.get("indexedFiles");
+	
+	
+	
+	private void indexData() throws Exception
+	{
+		Path path = Paths.get(indexPath);
 		try (Directory directory = FSDirectory.open(path)) {
-			String resourceName = "/resources/sampleDataset.json"; 
-			parser = new Parser(DataCreator.class.getResourceAsStream(resourceName));
-			indexer = new IndexCreator(directory);
-			parser.parseFile(indexer);
-
+			
+			this.indexer = new IndexCreator(directory);
+			
+			this.parser.parseFile(this.indexer);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public void run()
+	{
+		try {
+			this.indexData();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+
+	
 }
