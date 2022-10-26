@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.custom.CustomAnalyzer;
 import org.apache.lucene.analysis.miscellaneous.PerFieldAnalyzerWrapper;
 import org.apache.lucene.analysis.pattern.PatternTokenizerFactory;
@@ -46,7 +47,7 @@ public class IndexCreator {
 		Map<String,String> terms2replace=new HashMap<>();
 		terms2replace.put("pattern", ";");
 		terms2replace.put("group", "-1");
-		
+		//Analyzer a= new WhitespaceAnalyzer();
 		Analyzer a = CustomAnalyzer.builder().withTokenizer(PatternTokenizerFactory.class,terms2replace).build();
 		Analyzer defaultAnalyzer = new StandardAnalyzer();
 		Map<String, Analyzer> perFieldAnalyzers = new HashMap<>();
