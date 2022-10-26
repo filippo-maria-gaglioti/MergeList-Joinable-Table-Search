@@ -1,4 +1,4 @@
-cfs entry for: _2u.fld
+cfs entry for: _3g.fld
 doc 0
   field 0
     name titolo
@@ -26,7 +26,7 @@ doc 4
     value http://dbpedia.org/resource/List_of_Governors_of_Alabama?dbpv=2016-10&nif=table&ref=1.2_2
 END
 checksum 00000000003025383017
-cfs entry for: _2u.inf
+cfs entry for: _3g.inf
 number of fields 2
   name titolo
   number 0
@@ -61,7 +61,7 @@ number of fields 2
   vector similarity EUCLIDEAN
   soft-deletes false
 checksum 00000000001376635795
-cfs entry for: _2u.len
+cfs entry for: _3g.len
 field 
   type NUMERIC
   minvalue 27
@@ -78,7 +78,7 @@ T
 T
 END
 checksum 00000000001827297564
-cfs entry for: _2u.pst
+cfs entry for: _3g.pst
 field 
   term 01/01/1997
     doc 0
@@ -816,16 +816,16 @@ field titolo
 END
 checksum 00000000001430552684
 table of contents, size: 4
-  filename: _2u.fld
+  filename: _3g.fld
     start: 23
     end: 803
-  filename: _2u.inf
+  filename: _3g.inf
     start: 826
     end: 1574
-  filename: _2u.len
+  filename: _3g.len
     start: 1597
     end: 1705
-  filename: _2u.pst
+  filename: _3g.pst
     start: 1728
     end: 11269
 table of contents begins at offset: 0000000000000011269

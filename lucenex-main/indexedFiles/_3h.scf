@@ -1,4 +1,4 @@
-cfs entry for: _2v.fld
+cfs entry for: _3h.fld
 doc 0
   field 0
     name titolo
@@ -6,7 +6,7 @@ doc 0
     value http://dbpedia.org/resource/List_of_compositions_by_Johann_Sebastian_Bach?dbpv=2016-10&nif=table&ref=2_6
 END
 checksum 00000000003475486044
-cfs entry for: _2v.inf
+cfs entry for: _3h.inf
 number of fields 2
   name titolo
   number 0
@@ -41,7 +41,7 @@ number of fields 2
   vector similarity EUCLIDEAN
   soft-deletes false
 checksum 00000000001376635795
-cfs entry for: _2v.len
+cfs entry for: _3h.len
 field 
   type NUMERIC
   minvalue 63
@@ -50,7 +50,7 @@ field
 T
 END
 checksum 00000000003982548137
-cfs entry for: _2v.pst
+cfs entry for: _3h.pst
 field 
   term 1111
     doc 0
@@ -400,16 +400,16 @@ field titolo
 END
 checksum 00000000003996342373
 table of contents, size: 4
-  filename: _2v.fld
+  filename: _3h.fld
     start: 23
     end: 220
-  filename: _2v.inf
+  filename: _3h.inf
     start: 243
     end: 991
-  filename: _2v.len
+  filename: _3h.len
     start: 1014
     end: 1100
-  filename: _2v.pst
+  filename: _3h.pst
     start: 1123
     end: 5608
 table of contents begins at offset: 0000000000000005608

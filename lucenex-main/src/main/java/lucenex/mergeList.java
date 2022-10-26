@@ -18,10 +18,13 @@ import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.core.StopAnalyzer;
 import org.apache.lucene.analysis.custom.CustomAnalyzer;
 import org.apache.lucene.analysis.pattern.PatternTokenizerFactory;
+import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.Fields;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.MultiTerms;
 import org.apache.lucene.index.PostingsEnum;
+import org.apache.lucene.index.Terms;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.store.Directory;
@@ -45,7 +48,7 @@ public class mergeList {
 
 				
 				HashMap<Integer,Integer> results = setQuery(valuesToSearch, reader);
-				printMap(results);
+				printMap(results,reader);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -57,7 +60,7 @@ public class mergeList {
 
 	/**/
 	private static HashMap<Integer, Integer> setQuery(String sQuery, IndexReader reader) throws Exception {
-		//SCELTA ANALYZER DA FARE!!
+		
 		Map<String,String> terms2replace=new HashMap<>();
 		terms2replace.put("pattern", ";");
 		terms2replace.put("group", "-1");
@@ -66,15 +69,11 @@ public class mergeList {
 		QueryParser parser = new QueryParser("", a);
 		Query query = parser.parse(sQuery);
 
-		//METTO I TOKEN ANALIZZATI IN UNA LISTA
-		String s = query.toString();
-		System.out.println(s);
-		//divisione è problematica se c'è il nome del campo
+	
+		
+		
 		String[] lista= sQuery.split(";"); 
-		for (String st: lista)
-		{
-			System.out.println(st);
-		}
+		
 
 		//faccio il merge
 		HashMap<Integer,Integer> sortbycount = merge(reader, lista);
@@ -89,18 +88,19 @@ public class mergeList {
 			PostingsEnum posting = MultiTerms.getTermPostingsEnum(reader, "", new BytesRef(s));
 			//se esiste
 			if(posting != null) {
-				System.out.print(s + "\n");
+				
 				int docid;
 				//scorro la posting list
 				while ( ( docid = posting.nextDoc() ) != PostingsEnum.NO_MORE_DOCS ) {
 					//se documento già presente aggiorno
-					if(set2count.containsKey(docid)) {
-						System.out.print("aggiorno documento contenente " + s + "\n");
+					if(set2count.containsKey(docid)) 
+					{	
+					
 						set2count.put(docid, set2count.get(docid) + 1);
 					} 
 					//altrimenti inserisco
 					else {
-						System.out.print("inserisco documento contenente " + s + "\n");
+						
 						set2count.put(docid, 1);
 					}
 				}
@@ -126,12 +126,15 @@ public class mergeList {
 		return sortByCount;
 	}
 
-	private static void printMap(HashMap<Integer, Integer> map) {
+	private static void printMap(HashMap<Integer, Integer> map, IndexReader reader) throws IOException {
+		System.out.println("[RESULTS]\n");
 		for(Integer i: map.keySet()) {
 			System.out.print("Documento: " + i);
 			System.out.print(" Occorrenze: " + map.get(i) + "\n");
-		}
+			Document x = reader.document(i);
+			System.out.println("Table_Name: "+x.get("titolo"));
+			System.out.println("");
+			
+}
 	}
-
-	
 }
