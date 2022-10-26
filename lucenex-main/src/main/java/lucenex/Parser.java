@@ -7,7 +7,19 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
+/**
+ * Classe specializzata nel parsing del file json di tabelle.
+ * Per ogni tabella, analizza il contenuto, memorizza il nome della tabella ed estrae i dati delle colonne.
+ * Genera una stringa value1;value2 contenente tutti i valori individuati da indicizzare nell'indice luceene.
+ * 
+ * Effettua il commit del writer ogni N tabelle lette, per ridurre la frequenza di commit e limitare lo 
+ * spazio in memoria dei dati da indicizzare.
+ * 
+ * L'indicizzazione è delegata alla classe IndexCreator
+ * 
+ * @author 
+ *
+ */
 public class Parser {
 	
 	final static private int LIMITMAXDATA=4;
@@ -25,7 +37,7 @@ public class Parser {
 		int countTables=0;	//conta quante tables ha analizzato
 		while(!tokener.end()) {
 			JSONObject object = new JSONObject(tokener);
-			System.out.println("Id tabella: " + object.getString("id"));
+			System.out.println("[Id TAB°"+countTables+"]: " + object.getString("id"));
 			String id = object.getString("id");
 			object.getJSONArray("cells");
 			JSONArray cells = object.getJSONArray("cells");
@@ -42,15 +54,16 @@ public class Parser {
 					//System.out.print("Campi: " + cella.getString("cleanedText") + "\n");
 				}
 			}
-			String valuesInTable=this.formatValueString(texedFieldList);
-			System.out.println(valuesInTable);
+			ValuesFormatter vf= new ValuesFormatter();
+			String valuesInTable=vf.formatValueString(texedFieldList);
+			System.out.println("[VALUES EXTRACTED]:"+valuesInTable);
 			indexer.addData(id, valuesInTable);
 			tokener.next();
 			countTables++;
-			System.out.println("Tables analyzed:"+ countTables);
+			System.out.println("[TABLES ANALYZED]: "+ countTables);
 			if (countTables>LIMITMAXDATA)
 			{
-				System.out.println("Limit exceeded");
+				System.out.println("[COMMIT]: max number of tables processed before commit");
 				indexer.commitData();
 				countTables=0;
 			}

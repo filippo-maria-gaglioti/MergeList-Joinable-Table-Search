@@ -20,7 +20,20 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 
-
+/***
+ * Classe specializzata nella creazione dell'indice lucene.
+ * Indicizza due field diversi per doc.
+ * 1. titolo-> id della tabella di appartenenza dei value (StringField)
+ * 2. values-> valori di campo della tabella (TextField)
+ * Utilizza due analyzer distinti per i due campi
+ * 1. titolo-> StandardAnalyzer
+ * 2. values->CustomAnalyzer composto da un PatternTokenizer dove crea un token ogni ;
+ * Poichè nei campi delle tabelle possono esserci diversi valori (con spazi, virgole etc...) creiamo a partire 
+ * da tali valori una stringa composta da tutti i valori suddivisi con ; (un valore non presente nei campi).
+ * Cosi facendo limitiamo la dimensione dell'indice avendo 1 entry per valore di campo
+ * @author Wissel
+ *
+ */
 public class IndexCreator {
 
 	Directory directory;
@@ -58,11 +71,13 @@ public class IndexCreator {
 	}
 	public void commitData() throws IOException
 	{
-		System.out.println("COMMITED");
+		System.out.println("[COMMITED]");
 		this.writer.commit();
 	}
 	
-	public void closeWriter() throws Exception {
+	public void closeWriter() throws Exception 
+	{
+		System.out.println("[CLOSING CHANNEL TO INDEX]");
 		this.writer.close();
 	}
 	

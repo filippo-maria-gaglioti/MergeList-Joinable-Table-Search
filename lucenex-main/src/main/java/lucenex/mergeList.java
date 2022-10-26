@@ -9,12 +9,15 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Map.Entry;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.core.StopAnalyzer;
+import org.apache.lucene.analysis.custom.CustomAnalyzer;
+import org.apache.lucene.analysis.pattern.PatternTokenizerFactory;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.MultiTerms;
@@ -27,17 +30,21 @@ import org.apache.lucene.util.BytesRef;
 
 public class mergeList {
 	
-	public static void main(String args[]) throws Exception {
+	
+	public mergeList()
+	{
+		
+	}
+	
+	public void runMergeListAlgo(String valuesToSearch)
+	{
 
 		Path path = Paths.get("indexedFiles"); 
 		try (Directory directory = FSDirectory.open(path)) {
 			try (IndexReader reader = DirectoryReader.open(directory)) {
 
-				@SuppressWarnings("resource")
-				Scanner scanner = new Scanner(System.in);
-				System.out.print("Inserisci la query: ");
-				String query = scanner.nextLine();
-				HashMap<Integer,Integer> results = setQuery(query, reader);
+				
+				HashMap<Integer,Integer> results = setQuery(valuesToSearch, reader);
 				printMap(results);
 
 			} catch (Exception e) {
@@ -51,15 +58,23 @@ public class mergeList {
 	/**/
 	private static HashMap<Integer, Integer> setQuery(String sQuery, IndexReader reader) throws Exception {
 		//SCELTA ANALYZER DA FARE!!
-		CharArraySet stopWords = new CharArraySet(Arrays.asList("in", "dei", "di", "con", "a", "la", "il"), true);
-		Analyzer analyzer = new StopAnalyzer(stopWords);
-		QueryParser parser = new QueryParser("", analyzer);
+		Map<String,String> terms2replace=new HashMap<>();
+		terms2replace.put("pattern", ";");
+		terms2replace.put("group", "-1");
+		
+		Analyzer a = CustomAnalyzer.builder().withTokenizer(PatternTokenizerFactory.class,terms2replace).build();
+		QueryParser parser = new QueryParser("", a);
 		Query query = parser.parse(sQuery);
 
 		//METTO I TOKEN ANALIZZATI IN UNA LISTA
 		String s = query.toString();
+		System.out.println(s);
 		//divisione è problematica se c'è il nome del campo
-		String[] lista= s.split(" ");  
+		String[] lista= sQuery.split(";"); 
+		for (String st: lista)
+		{
+			System.out.println(st);
+		}
 
 		//faccio il merge
 		HashMap<Integer,Integer> sortbycount = merge(reader, lista);

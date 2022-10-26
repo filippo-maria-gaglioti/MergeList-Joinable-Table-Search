@@ -19,6 +19,11 @@
 			<artifactId>json</artifactId>
 			<version>20210307</version>
 		</dependency>
+		 <dependency>
+      <groupId>com.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>5.3</version>
+  </dependency>
 
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
@@ -31,6 +36,8 @@
             <artifactId>lucene-codecs</artifactId>
             <version>${lucene.version}</version>
         </dependency>
+       
+        
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-misc</artifactId>
