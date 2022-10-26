@@ -8,6 +8,13 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 
+/**
+ * Classe specializzata nella gestione della dinamica estrazione ed indicizzazione elemetni
+ * Campi:
+ * 1)Parser->logica di parsing del .JSON, tipo lucenex.Parser
+ * 2)indexer->logica di indicizzazione, tipo lucenex.IndexCreator
+ */
+
 public class DataCreator {
 	final static private String sampleData="/resources/sampleDataset.json";
 	final static private String indexPath="/lucenex-main/indexedFiles";
@@ -25,7 +32,11 @@ public class DataCreator {
 
 	
 	
-	
+	/**
+	 * Metodo effettivo di indicizzazione termini
+	 * Inizializza l'indexeter ed invoca il metodo parseFile del campo parser, passandoli l'indexter creato
+	 * @throws Exception
+	 */
 	private void indexData() throws Exception
 	{
 		Path path = Paths.get(indexPath);
@@ -40,6 +51,9 @@ public class DataCreator {
 		}
 	}
 	
+	/**
+	 * Interfaccia della classe per indicizzare i termini
+	 */
 	public void run()
 	{
 		try {

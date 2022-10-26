@@ -15,23 +15,23 @@ public class MainClass
 	{
 		
 		
-		DataCreator dc=new DataCreator();
-		dc.run();
-		
+		DataCreator dc=new DataCreator();		//indicizzazione dei valori nel db
+		dc.run();			
+			
 		System.out.println("======QUERY========");
-		String toSearch="studenti";
-		String fileName= new InputTableSearcherCSV().getTablePath(toSearch);
+		String toSearch="studenti";					//presa in input del nome della tabella .csv da cui prendere i dati di query per il join
+		String fileName= new InputTableSearcherCSV().getTablePath(toSearch); //acquisizoione del path della tabella da cercare
 		
 		System.out.println("[FILE NAME TO QUEY]: "+fileName);
 		
 		TableInputParserCSV tip=new TableInputParserCSV();
-		List<String>out=tip.getValuesOfFieldInTable(fileName, "matricola");
+		List<String>out=tip.getValuesOfFieldInTable(fileName, "matricola");	//acquisizione dati dal file e dalla colonna definita
 		ValuesFormatter vf= new ValuesFormatter();
-		String valuesToSearch=vf.formatValueString(out);
+		String valuesToSearch=vf.formatValueString(out);		//formattazione elementi estartti-> val1;val2;...;valn
 		
 		System.out.println("[VALUES TO SEARCH]: "+valuesToSearch);
-		mergeList mg= new mergeList();
-		mg.runMergeListAlgo(valuesToSearch);
+		mergeList mg= new mergeList();						
+		mg.runMergeListAlgo(valuesToSearch);		//esecuzione algo mergeList
 		
 	}
 
