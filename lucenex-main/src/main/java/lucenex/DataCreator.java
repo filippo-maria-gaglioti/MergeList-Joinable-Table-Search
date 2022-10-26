@@ -10,7 +10,7 @@ import org.apache.lucene.store.FSDirectory;
 
 public class DataCreator {
 	final static private String sampleData="/resources/sampleDataset.json";
-	final static private String indexPath="indexedFiles";
+	final static private String indexPath="/lucenex-main/indexedFiles";
 	 private Parser parser;
 	 private IndexCreator indexer;
 	public DataCreator() 

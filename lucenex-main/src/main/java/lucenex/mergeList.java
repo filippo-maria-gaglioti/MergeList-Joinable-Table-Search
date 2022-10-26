@@ -42,7 +42,7 @@ public class mergeList {
 	public void runMergeListAlgo(String valuesToSearch)
 	{
 
-		Path path = Paths.get("indexedFiles"); 
+		Path path = Paths.get("/lucenex-main/indexedFiles"); 
 		try (Directory directory = FSDirectory.open(path)) {
 			try (IndexReader reader = DirectoryReader.open(directory)) {
 
