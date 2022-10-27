@@ -29,10 +29,9 @@ public class MergeList {
 
 	public MergeList() {}
 
-	public void runMergeListAlgo(String valuesToSearch)
-	{
-
-		Path path = Paths.get("/lucenex-main/indexedFiles"); 
+	public void runMergeListAlgo(String valuesToSearch) {
+		
+		Path path = Paths.get("indexedFiles"); 
 		try (Directory directory = FSDirectory.open(path)) {
 			try (IndexReader reader = DirectoryReader.open(directory)) {
 
@@ -49,7 +48,7 @@ public class MergeList {
 
 	/**/
 	private static HashMap<Integer, Integer> setQuery(String sQuery, IndexReader reader) throws Exception {
-
+		//FORSE NON SERVE!
 		Map<String,String> terms2replace=new HashMap<>();
 		terms2replace.put("pattern", ";");
 		terms2replace.put("group", "-1");
@@ -58,7 +57,7 @@ public class MergeList {
 		QueryParser parser = new QueryParser("", a);
 		Query query = parser.parse(sQuery);
 
-		String[] lista= sQuery.split(";"); 
+		String[] lista = sQuery.split(";"); 
 
 		//faccio il merge
 		HashMap<Integer,Integer> sortbycount = merge(reader, lista);
@@ -67,6 +66,7 @@ public class MergeList {
 
 	/*MERGE DELLE POSTING LIST DEI TERMINI DELLA QUERY*/
 	private static HashMap<Integer,Integer> merge(IndexReader reader, String[] lista) throws Exception {
+		
 		HashMap<Integer, Integer> set2count = new HashMap<>();
 		for(String s: lista) {
 			//per ogni token della query ricavo la posting list

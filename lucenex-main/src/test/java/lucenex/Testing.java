@@ -20,28 +20,24 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
-public class TestIndexing {
+public class Testing {
 
-	// final static private String sampleData = "/resources/test.json";
 	final static private String indexPath = "indexedFiles";
 
 	DataCreator dc;
 
 	@Before 
 	public void setUp() throws Exception { 
-		Path path = Paths.get(indexPath);
-		try (Directory directory = FSDirectory.open(path)) {
-			this.dc = new DataCreator(); dc.run();
-		} catch (IOException e) {
-			e.printStackTrace(); 
-		} 
+		this.dc = new DataCreator();
+		dc.run();
 	}
 	
 	@After
 	public void deleteIndex() throws Exception {
 		this.dc.getIndexer().deleteIndex();
 	}
-
+	
+	/*TEST INDEXING*/
 	/* Nessuna Corrispondenza */
 	@Test
 	public void testNoMatch() throws Exception {
@@ -64,7 +60,7 @@ public class TestIndexing {
 	public void testOneMatchOneTerm() throws Exception {
 		Path path = Paths.get(indexPath);
 		PhraseQuery.Builder builder = new PhraseQuery.Builder();
-		builder.add(new Term("", "*lsn ‘tongue’"));
+		builder.add(new Term("", "ingegneria dei dati"));
 		PhraseQuery pq = builder.build();
 		try (Directory directory = FSDirectory.open(path)) {
 			try (IndexReader reader = DirectoryReader.open(directory)) {
@@ -81,7 +77,7 @@ public class TestIndexing {
 	public void testHalfMatch() throws Exception {
 		Path path = Paths.get(indexPath);
 		PhraseQuery.Builder builder = new PhraseQuery.Builder();
-		builder.add(new Term("", "‘tongue’"));
+		builder.add(new Term("", "dei dati"));
 		PhraseQuery pq = builder.build();
 		try (Directory directory = FSDirectory.open(path)) {
 			try (IndexReader reader = DirectoryReader.open(directory)) {
@@ -92,6 +88,43 @@ public class TestIndexing {
 			}
 		}
 	}
+	
+	/*TEST QUERY*/
+	/*Colonna che non ha nessun termine presente nell'indice*/
+	@Test
+	public void testNoMatchForMerge() {
+		QueryCreator qc = new QueryCreator("esami", "colori");
+		qc.run();
+	}
+	
+	/*Colonna che ha tutti i termine presenti nell'indice e ritorna un'unico documento*/
+	@Test
+	public void testPerfectMatchForMerge() {
+		QueryCreator qc = new QueryCreator("studenti", "Nome");
+		qc.run();
+	}
+	
+	/*Colonna che ha tutti la metà dei termini presenti nell'indice e ritorna un'unico documento*/
+	@Test
+	public void testHalfMatchForMerge() {
+		QueryCreator qc = new QueryCreator("studenti", "test");
+		qc.run();
+	}
+	
+	/*Colonna che ha tutti i termine presenti nell'indice e ritorna due documenti*/
+	@Test
+	public void testPerfectMatchForMerge2Doc() {
+		QueryCreator qc = new QueryCreator("esami", "test");
+		qc.run();
+	}
+	
+	/*Colonna che ha tutti i termine presenti nell'indice in tutti i documenti*/
+	@Test
+	public void testMergeAllDocs() {
+		QueryCreator qc = new QueryCreator("esami", "prova");
+		qc.run();
+	}
+
 
 	private void runQuery(IndexSearcher searcher, Query query) throws IOException {
 		runQuery(searcher, query, false);

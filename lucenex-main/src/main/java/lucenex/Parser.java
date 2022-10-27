@@ -51,8 +51,7 @@ public class Parser {
 			String id = object.getString("id");
 			object.getJSONArray("cells");
 			JSONArray cells = object.getJSONArray("cells");
-			//StringBuilder textField = new StringBuilder();
-			List<String> texedFieldList=new ArrayList<>();
+			List<String> texedFieldList = new ArrayList<>();
 			//scorre tutte le celle della tabella
 			for(int i = 0; i < cells.length(); i++) {
 				JSONObject cella = cells.getJSONObject(i);

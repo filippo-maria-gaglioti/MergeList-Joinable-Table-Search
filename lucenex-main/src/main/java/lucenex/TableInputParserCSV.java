@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.text.similarity.LevenshteinDistance;
@@ -19,11 +18,6 @@ import com.opencsv.exceptions.CsvValidationException;
 public class TableInputParserCSV {
 
 	public TableInputParserCSV() {}
-
-	//@SuppressWarnings("unused")
-	private int getPositionUsingName(String[] allColumnNames, String columnName) {
-		return Arrays.asList(allColumnNames).indexOf(columnName);
-	}
 
 	/**
 	 * Dato il reader del file csv e il nome della colonna da cui estrarre i dati, estraiamo i dati
@@ -85,7 +79,7 @@ public class TableInputParserCSV {
 				.withCSVParser(csvParser)
 				.build()) {
 			String[] r = reader.readNext();			//contiente tutti gli header in una Stringa
-			List<String> headerToSearch=this.getHeaderToSearch(r, field);	//cerchiamo l'indice di header da analizzare
+			List<String> headerToSearch = this.getHeaderToSearch(r, field);	//cerchiamo l'indice di header da analizzare
 			System.out.println("[COLUMN TO QUERY]: "+headerToSearch.get(0));
 			out=this.extractData(headerToSearch.get(1),reader);
 		}

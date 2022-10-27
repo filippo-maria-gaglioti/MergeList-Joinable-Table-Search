@@ -7,13 +7,13 @@ public class ValuesFormatter {
 	public ValuesFormatter() {}
 
 	public String formatValueString(List<String> texedFieldList) {
-		String s="";
-		int conta=0;
+		String s = "";
+		int conta = 0;
 		for (String curr: texedFieldList) {
-			if (conta==texedFieldList.size()-1) {
-				s=s.concat(curr.toLowerCase());
+			if (conta == texedFieldList.size()-1) {
+				s = s.concat(curr.toLowerCase());
 			} else {
-				s=s.concat(curr.toLowerCase()+";");
+				s = s.concat(curr.toLowerCase()+";");
 			}
 			conta++;
 		}

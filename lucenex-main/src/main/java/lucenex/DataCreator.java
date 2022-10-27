@@ -31,6 +31,7 @@ public class DataCreator {
 	 * @throws Exception
 	 */
 	private void indexData() throws Exception {
+		System.out.println("======INDEXING========");
 		Path path = Paths.get(indexPath);
 		try (Directory directory = FSDirectory.open(path)) {
 

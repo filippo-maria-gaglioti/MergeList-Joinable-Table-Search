@@ -1,0 +1,415 @@
+cfs entry for: _17.fld
+doc 0
+  field 0
+    name titolo
+    type string
+    value http://dbpedia.org/resource/List_of_compositions_by_Johann_Sebastian_Bach?dbpv=2016-10&nif=table&ref=2_6
+END
+checksum 00000000003475486044
+cfs entry for: _17.inf
+number of fields 2
+  name titolo
+  number 0
+  index options DOCS
+  term vectors false
+  payloads false
+  norms false
+  doc values NONE
+  doc values gen -1
+  attributes 0
+  data dimensional count 0
+  index dimensional count 0
+  dimensional num bytes 0
+  vector number of dimensions 0
+  vector encoding FLOAT32
+  vector similarity EUCLIDEAN
+  soft-deletes false
+  name 
+  number 1
+  index options DOCS_AND_FREQS_AND_POSITIONS
+  term vectors false
+  payloads false
+  norms true
+  doc values NONE
+  doc values gen -1
+  attributes 0
+  data dimensional count 0
+  index dimensional count 0
+  dimensional num bytes 0
+  vector number of dimensions 0
+  vector encoding FLOAT32
+  vector similarity EUCLIDEAN
+  soft-deletes false
+checksum 00000000001376635795
+cfs entry for: _17.len
+field 
+  type NUMERIC
+  minvalue 63
+  pattern 0
+0
+T
+END
+checksum 00000000003982548137
+cfs entry for: _17.pst
+field 
+  term 1111
+    doc 0
+      freq 2
+      pos 0
+      pos 96
+  term 1112
+    doc 0
+      freq 2
+      pos 8
+      pos 104
+  term 1113
+    doc 0
+      freq 2
+      pos 16
+      pos 112
+  term 1114
+    doc 0
+      freq 2
+      pos 24
+      pos 120
+  term 11211
+    doc 0
+      freq 2
+      pos 32
+      pos 128
+  term 12445
+    doc 0
+      freq 1
+      pos 56
+  term 14411
+    doc 0
+      freq 1
+      pos 64
+  term 2020
+    doc 0
+      freq 4
+      pos 116
+      pos 124
+      pos 132
+      pos 140
+  term 2021
+    doc 0
+      freq 6
+      pos 36
+      pos 44
+      pos 52
+      pos 60
+      pos 68
+      pos 76
+  term 2022
+    doc 0
+      freq 8
+      pos 4
+      pos 12
+      pos 20
+      pos 28
+      pos 84
+      pos 92
+      pos 100
+      pos 108
+  term 2222
+    doc 0
+      freq 2
+      pos 40
+      pos 136
+  term 27
+    doc 0
+      freq 18
+      pos 5
+      pos 13
+      pos 21
+      pos 29
+      pos 37
+      pos 45
+      pos 53
+      pos 61
+      pos 69
+      pos 77
+      pos 85
+      pos 93
+      pos 101
+      pos 109
+      pos 117
+      pos 125
+      pos 133
+      pos 141
+  term 51111
+    doc 0
+      freq 1
+      pos 72
+  term 56472
+    doc 0
+      freq 1
+      pos 88
+  term 651111
+    doc 0
+      freq 1
+      pos 80
+  term 7764
+    doc 0
+      freq 1
+      pos 48
+  term a123456
+    doc 0
+      freq 1
+      pos 1
+  term a17443
+    doc 0
+      freq 2
+      pos 73
+      pos 137
+  term a55332
+    doc 0
+      freq 2
+      pos 57
+      pos 121
+  term a56321
+    doc 0
+      freq 2
+      pos 17
+      pos 81
+  term a981234
+    doc 0
+      freq 2
+      pos 33
+      pos 97
+  term aaaaa
+    doc 0
+      freq 2
+      pos 2
+      pos 74
+  term aaaaa1
+    doc 0
+      freq 1
+      pos 7
+  term aass222
+    doc 0
+      freq 2
+      pos 27
+      pos 123
+  term b123457
+    doc 0
+      freq 1
+      pos 9
+  term b32555
+    doc 0
+      freq 2
+      pos 25
+      pos 89
+  term b65311
+    doc 0
+      freq 2
+      pos 65
+      pos 129
+  term b98321
+    doc 0
+      freq 1
+      pos 41
+  term bbbb
+    doc 0
+      freq 1
+      pos 10
+  term bbbb1
+    doc 0
+      freq 3
+      pos 15
+      pos 63
+      pos 143
+  term bbbb10
+    doc 0
+      freq 1
+      pos 87
+  term bbbb11
+    doc 0
+      freq 1
+      pos 95
+  term bbbb13
+    doc 0
+      freq 1
+      pos 111
+  term bbbb14
+    doc 0
+      freq 1
+      pos 119
+  term bbbb16
+    doc 0
+      freq 1
+      pos 135
+  term bbbb2
+    doc 0
+      freq 2
+      pos 23
+      pos 79
+  term bbbb3
+    doc 0
+      freq 1
+      pos 31
+  term bbbb4
+    doc 0
+      freq 1
+      pos 39
+  term bbbb5
+    doc 0
+      freq 2
+      pos 47
+      pos 103
+  term bbbb6
+    doc 0
+      freq 1
+      pos 55
+  term bbbb8
+    doc 0
+      freq 1
+      pos 71
+  term bbbb9
+    doc 0
+      freq 1
+      pos 127
+  term c122334
+    doc 0
+      freq 2
+      pos 49
+      pos 113
+  term cccc
+    doc 0
+      freq 2
+      pos 18
+      pos 138
+  term dddd
+    doc 0
+      freq 2
+      pos 26
+      pos 82
+  term de5652235
+    doc 0
+      freq 1
+      pos 91
+  term eeee
+    doc 0
+      freq 3
+      pos 34
+      pos 66
+      pos 90
+  term eng
+    doc 0
+      freq 8
+      pos 86
+      pos 94
+      pos 102
+      pos 110
+      pos 118
+      pos 126
+      pos 134
+      pos 142
+  term ffff
+    doc 0
+      freq 2
+      pos 42
+      pos 98
+  term fffs12331
+    doc 0
+      freq 2
+      pos 19
+      pos 115
+  term ffjwj333
+    doc 0
+      freq 1
+      pos 51
+  term ffs1112
+    doc 0
+      freq 2
+      pos 11
+      pos 107
+  term gg11111
+    doc 0
+      freq 2
+      pos 3
+      pos 99
+  term ggahah01
+    doc 0
+      freq 1
+      pos 59
+  term gggg
+    doc 0
+      freq 1
+      pos 106
+  term ghji45
+    doc 0
+      freq 2
+      pos 43
+      pos 139
+  term hh14422
+    doc 0
+      freq 1
+      pos 83
+  term hhh
+    doc 0
+      freq 2
+      pos 58
+      pos 114
+  term iiii
+    doc 0
+      freq 1
+      pos 122
+  term ita
+    doc 0
+      freq 10
+      pos 6
+      pos 14
+      pos 22
+      pos 30
+      pos 38
+      pos 46
+      pos 54
+      pos 62
+      pos 70
+      pos 78
+  term llll
+    doc 0
+      freq 1
+      pos 130
+  term sfffee95
+    doc 0
+      freq 2
+      pos 35
+      pos 131
+  term ss68992
+    doc 0
+      freq 1
+      pos 67
+  term u4444
+    doc 0
+      freq 1
+      pos 105
+  term yy11111
+    doc 0
+      freq 1
+      pos 75
+  term zzzzz
+    doc 0
+      freq 1
+      pos 50
+field titolo
+  term http://dbpedia.org/resource/List_of_compositions_by_Johann_Sebastian_Bach?dbpv=2016-10&nif=table&ref=2_6
+    doc 0
+END
+checksum 00000000003996342373
+table of contents, size: 4
+  filename: _17.fld
+    start: 23
+    end: 220
+  filename: _17.inf
+    start: 243
+    end: 991
+  filename: _17.len
+    start: 1014
+    end: 1100
+  filename: _17.pst
+    start: 1123
+    end: 5608
+table of contents begins at offset: 0000000000000005608
