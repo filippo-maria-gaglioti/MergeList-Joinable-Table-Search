@@ -28,7 +28,7 @@ public class Testing {
 
 	@Before 
 	public void setUp() throws Exception { 
-		this.dc = new DataCreator();
+		this.dc = new DataCreator();           //NOME DELLA TABELLA DA INDICIZZARE VA SPECIFICATO!!
 		dc.run();
 	}
 	
