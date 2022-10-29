@@ -23,7 +23,7 @@ import org.json.JSONTokener;
  */
 public class Parser {
 
-	final static private int LIMITMAXDATA = 1500;    //limite di tabelle da parsare prima del commit
+	final static private int LIMITMAXDATA = 1;    //limite di tabelle da parsare prima del commit
 	InputStream is;
 
 	public Parser(InputStream is) {
@@ -61,7 +61,6 @@ public class Parser {
 				if(!cella.getBoolean("isHeader")) 
 				{
 					texedFieldList.add(cella.getString("cleanedText"));
-					
 				}
 			}
 			ValuesFormatter vf = new ValuesFormatter();
@@ -77,16 +76,18 @@ public class Parser {
 			{
 				//commit dei dati presenti in centrale e azzero il numero di tabelle analizzate
 				System.out.println("[COMMIT]: max number of tables processed before commit");
-				System.out.println("[TABLES ANALYZED]: " + totTables);
+				//System.out.println("[TABLES ANALYZED]: " + totTables);
 				indexer.commitData();
 				countTables = 0;
 			}
 		}
+		
 		indexer.commitData();
 		indexer.closeWriter();
 		long end = System.currentTimeMillis();
+		float time = (float)((end - start)/1000)/60;
 		System.out.println("[TABLES ANALYZED]: " + totTables);
-		System.out.println("[TEMPO IMPIEGATO]: " + ((end - start)/1000)/60 + " minuti");
+		System.out.println("[TEMPO IMPIEGATO]: " + time + " minuti");
 	}
 
 	public InputStream getInputStream() {

@@ -8,19 +8,13 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.custom.CustomAnalyzer;
-import org.apache.lucene.analysis.pattern.PatternTokenizerFactory;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.MultiTerms;
 import org.apache.lucene.index.PostingsEnum;
-import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.Query;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.BytesRef;
@@ -30,14 +24,17 @@ public class MergeList {
 	public MergeList() {}
 
 	public void runMergeListAlgo(String valuesToSearch) {
-		
-		Path path = Paths.get("indexedFiles"); 
+
+		Path path = Paths.get("C:\\indexedFiles"); 
 		try (Directory directory = FSDirectory.open(path)) {
 			try (IndexReader reader = DirectoryReader.open(directory)) {
 
+				long start = System.currentTimeMillis();
 				HashMap<Integer,Integer> results = setQuery(valuesToSearch, reader);
 				printMap(results,reader);
-
+				long end = System.currentTimeMillis();
+				float time = (float) (end - start)/1000/60;
+				System.out.println("[TEMPO IMPIEGATO]: " + time + " minuti");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
@@ -47,16 +44,7 @@ public class MergeList {
 	}
 
 	/**/
-	private static HashMap<Integer, Integer> setQuery(String sQuery, IndexReader reader) throws Exception {
-		//FORSE NON SERVE!
-		Map<String,String> terms2replace=new HashMap<>();
-		terms2replace.put("pattern", ";");
-		terms2replace.put("group", "-1");
-
-		Analyzer a = CustomAnalyzer.builder().withTokenizer(PatternTokenizerFactory.class,terms2replace).build();
-		QueryParser parser = new QueryParser("", a);
-		Query query = parser.parse(sQuery);
-
+	private HashMap<Integer, Integer> setQuery(String sQuery, IndexReader reader) throws Exception {
 		String[] lista = sQuery.split(";"); 
 
 		//faccio il merge
@@ -65,8 +53,8 @@ public class MergeList {
 	}
 
 	/*MERGE DELLE POSTING LIST DEI TERMINI DELLA QUERY*/
-	private static HashMap<Integer,Integer> merge(IndexReader reader, String[] lista) throws Exception {
-		
+	private HashMap<Integer,Integer> merge(IndexReader reader, String[] lista) throws Exception {
+
 		HashMap<Integer, Integer> set2count = new HashMap<>();
 		for(String s: lista) {
 			//per ogni token della query ricavo la posting list
@@ -93,9 +81,10 @@ public class MergeList {
 	}
 
 	/* ORDINA LA LISTA CON I RISULTATI*/
-	private static HashMap<Integer, Integer> sort(HashMap<Integer, Integer> set2count) {
+	private HashMap<Integer, Integer> sort(HashMap<Integer, Integer> set2count) {
 		List<Entry<Integer, Integer>> list = new LinkedList<Entry<Integer, Integer>>(set2count.entrySet());
 		Collections.sort(list, new Comparator<Entry<Integer, Integer>>() {  
+			@Override
 			public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2) {
 				return o1.getValue().compareTo(o2.getValue());
 			}
@@ -108,14 +97,17 @@ public class MergeList {
 		return sortByCount;
 	}
 
-	private static void printMap(HashMap<Integer, Integer> map, IndexReader reader) throws IOException {
+	private void printMap(HashMap<Integer, Integer> map, IndexReader reader) throws IOException {
 		System.out.println("[RESULTS]\n");
 		for(Integer i: map.keySet()) {
-			System.out.print("Documento: " + i);
-			System.out.print(" Occorrenze: " + map.get(i) + "\n");
-			Document x = reader.document(i);
-			System.out.println("Table_Name: "+x.get("titolo"));
-			System.out.println("");
+			if(map.get(i)>2) {
+				System.out.print("Documento: " + i);
+				System.out.print(" Occorrenze: " + map.get(i) + "\n");
+				Document x = reader.document(i);
+				System.out.println("Table_Name: " + x.get("titolo"));
+				System.out.println("");
+			}
+
 		}
 	}
 

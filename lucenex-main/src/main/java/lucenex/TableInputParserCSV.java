@@ -31,7 +31,7 @@ public class TableInputParserCSV {
 	private List<String> extractData(String columnIndex, CSVReader reader) throws CsvValidationException, IOException {
 		String [] nextLine;
 		int idPosition;
-		List <String> output=new ArrayList<>();
+		List <String> output = new ArrayList<>();
 
 		idPosition = Integer.parseInt(columnIndex);
 
@@ -48,31 +48,31 @@ public class TableInputParserCSV {
 	 * @return
 	 */
 	private List<String> getHeaderToSearch(String[] headers, String field) {
-		String out="";	//il campo da trovare
-		String index="0";
-		int conta=0;	//indice di colonna
-		int min=100000;	//il valore minimo iniziale
+		String out = "";	//il campo da trovare
+		String index = "0";
+		int conta = 0;	//indice di colonna
+		int min = 100000;	//il valore minimo iniziale
 
-		LevenshteinDistance j= new LevenshteinDistance();
+		LevenshteinDistance j = new LevenshteinDistance();
 
 		for (String s: headers) {
-			int curr=0;
-			curr=j.apply(field, s.toLowerCase());
+			int curr = 0;
+			curr = j.apply(field, s.toLowerCase());
 
 			if (curr<min) {
-				min=curr;
-				out=s;
-				index=Integer.toString(conta);
+				min = curr;
+				out = s;
+				index = Integer.toString(conta);
 			}
 			conta++;
 		}
-		List<String> output=new ArrayList<>();
+		List<String> output = new ArrayList<>();
 		output.add(out);
 		output.add(index);
 		return output;
 	}
 
-	public List<String> getValuesOfFieldInTable(String fileName,String field) throws FileNotFoundException, IOException, CsvException {
+	public List<String> getValuesOfFieldInTable(String fileName, String field) throws FileNotFoundException, IOException, CsvException {
 		List<String> out;
 		CSVParser csvParser = new CSVParserBuilder().withSeparator(';').build(); //definiamo ; come separatore
 		try (CSVReader reader = new CSVReaderBuilder(new FileReader(fileName))
@@ -80,7 +80,7 @@ public class TableInputParserCSV {
 				.build()) {
 			String[] r = reader.readNext();			//contiente tutti gli header in una Stringa
 			List<String> headerToSearch = this.getHeaderToSearch(r, field);	//cerchiamo l'indice di header da analizzare
-			System.out.println("[COLUMN TO QUERY]: "+headerToSearch.get(0));
+			System.out.println("[COLUMN TO QUERY]: " + headerToSearch.get(0));
 			out=this.extractData(headerToSearch.get(1),reader);
 		}
 		return out;
