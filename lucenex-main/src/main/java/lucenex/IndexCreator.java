@@ -37,14 +37,17 @@ import org.apache.lucene.store.Directory;
 public class IndexCreator {
 
 	Directory directory;
+	private static final String separetor="%f%;";
+	private String sep;
 	
 	IndexWriter writer;
 
 	public IndexCreator(Directory directory) throws Exception {
 		this.directory = directory;
+		this.sep= new Separetor().getSeparetor();
 		
 		Map<String,String> terms2replace=new HashMap<>();
-		terms2replace.put("pattern", ";");
+		terms2replace.put("pattern", this.sep);
 		terms2replace.put("group", "-1");
 		
 		Analyzer a = CustomAnalyzer.builder().withTokenizer(PatternTokenizerFactory.class,terms2replace).build();

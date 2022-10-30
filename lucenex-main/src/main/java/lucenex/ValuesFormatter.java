@@ -4,9 +4,10 @@ import java.util.List;
 
 public class ValuesFormatter 
 {
+	private String sep;
 	public ValuesFormatter()
 	{
-		
+		this.sep=new Separetor().getSeparetor();
 	}
 	public String formatValueString(List<String> texedFieldList) {
 		String s="";
@@ -15,12 +16,12 @@ public class ValuesFormatter
 		{
 				if (conta==texedFieldList.size()-1)
 				{
-					s=s.concat(curr.toLowerCase());
+					s=s.concat(curr.toLowerCase()+this.sep);
 				}
 				else
 				{
 			
-					s=s.concat(curr.toLowerCase()+";");
+					s=s.concat(curr.toLowerCase()+this.sep);
 					
 				}
 				conta++;

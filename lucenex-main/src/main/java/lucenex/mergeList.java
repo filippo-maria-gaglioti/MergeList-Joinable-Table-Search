@@ -33,10 +33,10 @@ import org.apache.lucene.util.BytesRef;
 
 public class mergeList {
 	
-	
+	private String sep;
 	public mergeList()
 	{
-		
+		this.sep=new Separetor().getSeparetor();
 	}
 	
 	public void runMergeListAlgo(String valuesToSearch)
@@ -59,10 +59,10 @@ public class mergeList {
 	}
 
 	/**/
-	private static HashMap<Integer, Integer> setQuery(String sQuery, IndexReader reader) throws Exception {
+	private  HashMap<Integer, Integer> setQuery(String sQuery, IndexReader reader) throws Exception {
 		
 		Map<String,String> terms2replace=new HashMap<>();
-		terms2replace.put("pattern", ";");
+		terms2replace.put("pattern", this.sep);
 		terms2replace.put("group", "-1");
 		
 		Analyzer a = CustomAnalyzer.builder().withTokenizer(PatternTokenizerFactory.class,terms2replace).build();
@@ -72,7 +72,7 @@ public class mergeList {
 	
 		
 		
-		String[] lista= sQuery.split(";"); 
+		String[] lista= sQuery.split(this.sep); 
 		
 
 		//faccio il merge

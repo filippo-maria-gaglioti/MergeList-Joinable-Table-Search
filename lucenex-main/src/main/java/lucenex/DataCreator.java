@@ -20,6 +20,7 @@ public class DataCreator {
 	final static private String indexPath="/lucenex-main/indexedFiles";
 	 private Parser parser;
 	 private IndexCreator indexer;
+	 
 	public DataCreator() 
 	{
 		this.parser=new Parser(DataCreator.class.getResourceAsStream(sampleData));
