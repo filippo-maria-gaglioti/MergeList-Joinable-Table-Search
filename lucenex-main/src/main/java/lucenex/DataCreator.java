@@ -16,7 +16,7 @@ import org.apache.lucene.store.FSDirectory;
 public class DataCreator {
 
 	final static private String sampleData = "/resources/tables.json";
-	final static private String indexPath = "C:\\indexedFiles2";
+	final static private String indexPath = "C:\\indexedFiles";
 	private Parser parser;
 	private IndexCreator indexer;
 

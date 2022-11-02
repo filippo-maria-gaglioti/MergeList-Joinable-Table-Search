@@ -23,7 +23,7 @@ import org.json.JSONTokener;
  */
 public class Parser {
 
-	final static private int LIMITMAXDATA = 1;    //limite di tabelle da parsare prima del commit
+	final static private int LIMITMAXDATA = 1500;    //limite di tabelle da parsare prima del commit
 	InputStream is;
 
 	public Parser(InputStream is) {
@@ -43,13 +43,14 @@ public class Parser {
 	 * @throws Exception
 	 */
 	public void parseFile(IndexCreator indexer) throws Exception {
-		JSONTokener tokener = new JSONTokener(is);
 		int countTables = 0;	//conta quante tables ha analizzato
 		int totTables = 0;
 		long start = System.currentTimeMillis();
+		
+		JSONTokener tokener = new JSONTokener(is);
+		ValuesFormatter vf = new ValuesFormatter();
 		while(!tokener.end()) {
 			JSONObject object = new JSONObject(tokener);
-			//System.out.println("[Id TAB°" + countTables + "]: " + object.getString("id"));
 			String id = object.getString("id");
 			object.getJSONArray("cells");
 			JSONArray cells = object.getJSONArray("cells");
@@ -63,20 +64,17 @@ public class Parser {
 					texedFieldList.add(cella.getString("cleanedText"));
 				}
 			}
-			ValuesFormatter vf = new ValuesFormatter();
 			String valuesInTable = vf.formatValueString(texedFieldList);	//trasformo la lista di valori in una stringa val1;val2...
-			//System.out.println("[VALUES EXTRACTED]:" + valuesInTable);
 			indexer.addData(id, valuesInTable);							//indicizzo in locale (no commit)
 			tokener.next();
 			countTables++;
 			totTables++;
-			//System.out.println("[TABLES ANALYZED]: " + countTables);
 			//se ho analizzato un numero di tabelle maggiore della soglia
 			if (countTables > LIMITMAXDATA)
 			{
 				//commit dei dati presenti in centrale e azzero il numero di tabelle analizzate
 				System.out.println("[COMMIT]: max number of tables processed before commit");
-				//System.out.println("[TABLES ANALYZED]: " + totTables);
+				System.out.println("[TABLES ANALYZED]: " + totTables);
 				indexer.commitData();
 				countTables = 0;
 			}

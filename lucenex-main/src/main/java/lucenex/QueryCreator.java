@@ -23,7 +23,7 @@ public class QueryCreator {
 		System.out.println("[FILE NAME TO QUEY]: " + fileName);
 
 		TableInputParserCSV tip = new TableInputParserCSV();
-		List<String>out = tip.getValuesOfFieldInTable(fileName, campo);	//acquisizione dati dal file e dalla colonna definita
+		List<String> out = tip.getValuesOfFieldInTable(fileName, campo);	//acquisizione dati dal file e dalla colonna definita
 		ValuesFormatter vf = new ValuesFormatter();
 		String valuesToSearch = vf.formatValueString(out);		//formattazione elementi estartti-> val1;val2;...;valn
 
